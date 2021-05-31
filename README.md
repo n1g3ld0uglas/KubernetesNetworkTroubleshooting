@@ -18,11 +18,27 @@ kubectl exec calico-node-75pfg -n calico-system -- ip a
 
 Another option would be simply print the route to the pod ip address on the node:
 
+To find the cluster IP address of a Kubernetes pod, use the kubectl get pod command on your local machine, with the option -o wide. This option will list more information, including the node the pod resides on, and the pod’s cluster IP.
+
 ```
-route -n | grep <podIP>
+kubectl get pods -n storefront -o wide
 ```
 
-That route (route -n | grep <podIP>) should give the cali* interface of the pod.
+<img width="938" alt="Screenshot 2021-05-31 at 10 16 24" src="https://user-images.githubusercontent.com/82048393/120179285-464b5f80-c202-11eb-95f4-4c2cd8709fac.png">
+
+That route (route -n | grep podIP) should give the cali* interface of the pod.
+
+```
+route -n | grep 192.168.4.173
+```
+
+Once that is found, it is just one command to find the corresponding chain in iptables path. 
+The key thing is to remember is how Calico programs the chain. 
+
+- All traffic to the pod go through the chain (cali-tw-<cali**>). 
+- All traffic from the pod go through the chain (cali-fw-<cali**>). 
+
+Refer to the following terminal video to understand how to interpret the traffic going out from the pod:
 
 
 
@@ -63,13 +79,7 @@ kubectl get pods -A -o wide
 ```
 
 <img width="1378" alt="Screenshot 2021-05-31 at 10 14 58" src="https://user-images.githubusercontent.com/82048393/120179125-1b610b80-c202-11eb-93ca-7f16fd6d1226.png">
-
-Similarly, you can filter pod search down to a specific namespace:
-```
-kubectl get pods -n storefront -o wide
-```
-
-<img width="938" alt="Screenshot 2021-05-31 at 10 16 24" src="https://user-images.githubusercontent.com/82048393/120179285-464b5f80-c202-11eb-95f4-4c2cd8709fac.png">
+  
 
 Let's do the same for the calico-system namespace:
 ```
