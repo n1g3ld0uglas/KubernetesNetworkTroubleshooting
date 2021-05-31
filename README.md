@@ -79,6 +79,37 @@ kubectl get pods -A -o wide
 ```
 
 <img width="1378" alt="Screenshot 2021-05-31 at 10 14 58" src="https://user-images.githubusercontent.com/82048393/120179125-1b610b80-c202-11eb-93ca-7f16fd6d1226.png">
+
+If a pod is in 'ImagePullBackOff' status, we can 'describe' what has gone wrong with the pod:
+```
+kubectl describe pod tigera-internal-app-cvn98 -n tigera-internal
+```
+
+<img width="784" alt="Screenshot 2021-05-31 at 14 09 43" src="https://user-images.githubusercontent.com/82048393/120198324-e2349580-c219-11eb-9e22-2bd7b60f415b.png">
+
+You can run kubectl edit to change the image pulled for your pulled if incorrect/misconfigured:
+```
+kubectl edit pod tigera-internal-app-cvn98 -n tigera-internal
+```
+<img width="644" alt="Screenshot 2021-05-31 at 14 13 52" src="https://user-images.githubusercontent.com/82048393/120200139-e792df80-c21b-11eb-9469-4b25a93c1d01.png">
+
+
+
+If this fails, you can try deleting all pods within that specific namespace. Kubernetes will attempt to recreate those pods:
+
+```
+kubectl delete --all pods --namespace=tigera-internal | grep tigera-internal
+```
+
+Then you can check if those pods re-create successfully:
+
+```
+kubectl get pods -A | grep tigera-internal
+```
+
+<img width="901" alt="Screenshot 2021-05-31 at 14 19 25" src="https://user-images.githubusercontent.com/82048393/120199870-971b8200-c21b-11eb-88a1-0f00f27c3816.png">
+
+
   
 
 Let's do the same for the calico-system namespace:
