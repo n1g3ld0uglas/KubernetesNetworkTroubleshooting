@@ -183,3 +183,13 @@ kubectl get po -o wide -A
 
 <img width="1452" alt="Screenshot 2021-05-31 at 11 09 05" src="https://user-images.githubusercontent.com/82048393/120181158-93303580-c204-11eb-997a-f9b85072a70a.png">
 
+
+Get an output of debug changes for the Nodes
+```
+./calicoctl -l debug get nodes
+```
+
+<img width="1779" alt="Screenshot 2021-05-31 at 14 31 38" src="https://user-images.githubusercontent.com/82048393/120201083-f0d07c00-c21c-11eb-8c1d-cb40d5ef524b.png">
+
+
+
