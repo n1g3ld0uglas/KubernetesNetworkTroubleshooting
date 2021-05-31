@@ -1,6 +1,16 @@
 # KubernetesNetworkTroubleshooting
 Troubleshooting our Kubernetes Networking with Calico
 
+Probably the most common starting point is with 'ifconfig':
+```
+ifconfig -a
+```
+
+<img width="527" alt="Screenshot 2021-05-31 at 10 50 34" src="https://user-images.githubusercontent.com/82048393/120180526-c4f4cc80-c203-11eb-86bb-c371eef93fa6.png">
+
+
+
+
 Get DaemonSets:
 ```
 kubectl get ds -A
@@ -61,6 +71,7 @@ iptables-save | grep cali3fa04d10d5a
 <img width="1348" alt="Screenshot 2021-05-31 at 10 22 19" src="https://user-images.githubusercontent.com/82048393/120179566-ab9f5080-c202-11eb-8419-cd0dfe1c6bf0.png">
 
 
+
 You can check on the status of calico nodes by running the below command:
 ```
 sudo ./calicoctl node status
@@ -71,4 +82,14 @@ sudo ./calicoctl node status
 Any external nodes to the cluster (non-peered) will show as 'global' under 'PEER TYPE':
 
 ![Screenshot 2021-05-31 at 10 39 49](https://user-images.githubusercontent.com/82048393/120180158-57e13700-c203-11eb-9420-5dd0d21b1696.png)
+
+
+To get a full .YAML output for your IPPool Configuration, run the below command:
+```
+./calicoctl get ippools default-ipv4-ippool -o yaml
+```
+
+<img width="530" alt="Screenshot 2021-05-31 at 10 52 14" src="https://user-images.githubusercontent.com/82048393/120180731-09806800-c204-11eb-9523-a98e9db881fa.png">
+
+
 
