@@ -70,6 +70,28 @@ iptables-save | grep cali3fa04d10d5a
 
 <img width="1348" alt="Screenshot 2021-05-31 at 10 22 19" src="https://user-images.githubusercontent.com/82048393/120179566-ab9f5080-c202-11eb-8419-cd0dfe1c6bf0.png">
 
+Get error-specific logs for the calico nodes running within calico-system:
+```
+kubectl logs calico-node-75pfg -n calico-system -c calico-node | grep ERROR
+```
+
+<img width="1720" alt="Screenshot 2021-05-31 at 13 31 04" src="https://user-images.githubusercontent.com/82048393/120193561-7d2a7100-c214-11eb-9e4d-eda96c611b89.png">
+
+If you haven't done so already, we recommend installing calicoctl command-line utility:
+https://docs.projectcalico.org/getting-started/clis/calicoctl/install
+
+Use the following command to download the calicoctl binary.
+```
+curl -o calicoctl -O -L  "https://github.com/projectcalico/calicoctl/releases/download/v3.19.1/calicoctl" 
+```
+
+Set the file to be executable.
+```
+chmod +x calicoctl 
+```
+
+<img width="913" alt="Screenshot 2021-05-31 at 13 34 10" src="https://user-images.githubusercontent.com/82048393/120193953-ef02ba80-c214-11eb-8434-a1635bccd108.png">
+
 
 
 You can check on the status of calico nodes by running the below command:
