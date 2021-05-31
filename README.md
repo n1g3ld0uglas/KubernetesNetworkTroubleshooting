@@ -8,6 +8,21 @@ ifconfig -a
 
 <img width="527" alt="Screenshot 2021-05-31 at 10 50 34" src="https://user-images.githubusercontent.com/82048393/120180526-c4f4cc80-c203-11eb-86bb-c371eef93fa6.png">
 
+You can do this for a specific pod via the below command:
+
+```
+kubectl exec calico-node-75pfg -n calico-system -- ip a
+```
+
+<img width="744" alt="Screenshot 2021-05-31 at 13 42 01" src="https://user-images.githubusercontent.com/82048393/120195066-4190a680-c216-11eb-8df7-7896cc598e96.png">
+
+Another option would be simply print the route to the pod ip address on the node:
+
+```
+route -n | grep <podIP>
+```
+
+That route (route -n | grep <podIP>) should give the cali* interface of the pod.
 
 
 
