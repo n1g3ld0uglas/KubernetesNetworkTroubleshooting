@@ -91,5 +91,17 @@ To get a full .YAML output for your IPPool Configuration, run the below command:
 
 <img width="530" alt="Screenshot 2021-05-31 at 10 52 14" src="https://user-images.githubusercontent.com/82048393/120180731-09806800-c204-11eb-9523-a98e9db881fa.png">
 
+To confirm the interface and network where your workloads are running from, run the below command
+```
+./calicoctl get workloadEndpoint -A
+```
 
+<img width="1046" alt="Screenshot 2021-05-31 at 11 07 33" src="https://user-images.githubusercontent.com/82048393/120181029-68de7800-c204-11eb-942b-615be9a90bcd.png">
+
+Similarly, in kubectl you can get the IP address and Node IP for all pods:
+```
+kubectl get po -o wide -A
+```
+
+<img width="1452" alt="Screenshot 2021-05-31 at 11 09 05" src="https://user-images.githubusercontent.com/82048393/120181158-93303580-c204-11eb-997a-f9b85072a70a.png">
 
