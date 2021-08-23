@@ -21,6 +21,27 @@ journalctl command in Linux is used to view systemd, kernal and journal logs.
 journalctl -u kubelet
 ```
 
+## Deployments
+
+Set image of a deployment nginx:
+```kubectl set image deploy nginx nginx=nginx:1.18```
+Scale deployment nginx to 4 replicas and record the action:
+```kubectl scale deploy nginx --repliacs=4 --record```
+Get events in the current namespace:
+```kubectl get events```
+
+## Scheduling
+Get taints of node node01:
+```kubectl describe node node01 | grep -i Taints:```
+Label node node01 with label size=small:
+```kubectl label nodes node01 size=small```
+Default static pods path:
+```/etc/kubernetes/manifests```
+Check pod nginx logs:
+```kubectl logs nginx```
+Check pod logs with multiple containers:
+```kubectl logs <pod_name> -c <container_name>```
+
 ## Calico Stuff in Progress:
 
 Probably the most common starting point is with 'ifconfig':
