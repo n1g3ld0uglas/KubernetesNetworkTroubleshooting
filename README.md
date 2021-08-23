@@ -1,5 +1,27 @@
 # KubernetesNetworkTroubleshooting
-Troubleshooting our Kubernetes Networking with Calico
+Troubleshooting Kubernetes Networking with Calico.
+I created this repo to help prepare for the CKA exam:
+
+
+## PS AUX Command:
+The ps aux command is a tool to monitor processes running on your Linux system. 
+```
+ps -aux | grep kubelet
+```
+
+## SystemCTL Command:
+How to view status of a service on Linux using systemctl
+```
+systemctl status kubelet.service -l
+```
+
+## JournalCTL Command:
+journalctl command in Linux is used to view systemd, kernal and journal logs.
+```
+journalctl -u kubelet
+```
+
+## Calico Stuff in Progress:
 
 Probably the most common starting point is with 'ifconfig':
 ```
