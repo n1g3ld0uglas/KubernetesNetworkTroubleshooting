@@ -234,5 +234,50 @@ Get an output of debug changes for the Nodes
 
 <img width="1779" alt="Screenshot 2021-05-31 at 14 31 38" src="https://user-images.githubusercontent.com/82048393/120201083-f0d07c00-c21c-11eb-8c1d-cb40d5ef524b.png">
 
+## Deployments revisited:
+
+Set image of a deployment nginx:
+```
+kubectl set image deploy nginx nginx=nginx:1.18
+```
 
 
+Scale deployment nginx to 4 replicas and record the action:
+```
+kubectl scale deploy nginx --repliacs=4 --record
+```
+
+
+## Cluster Maintenance:
+
+Drain node node01 of all workloads:
+```
+kubectl drain node01
+```
+Make the node schedulable again:
+```
+kubectl uncordon node01
+```
+Upgrade cluster to 1.18 with kubeadm:
+```
+kubeadm upgrade plan
+apt-get upgrade -y kubeadm=1.18.0–00
+kubeadm upgrade apply v1.18.0
+apt-get upgrade -y kubelet=1.18.0–00
+systemctl restart kubelet
+```
+Backup etcd:
+```
+export ETCDCTL_API=3
+etcdctl \
+--endpoints=https://127.0.0.1:2379 \
+--cacert=/etc/kubernetes/pki/etcd/ca.crt \
+--cert=/etc/kubernetes/pki/etcd/server.crt \
+--key=/etc/kubernetes/pki/etcd/server.key \
+snapshot save /tmp/etcd-backup.db
+```
+Restore etcd:
+```
+ETCDCTL_API=3 etcdctl snapshot restore /tmp/etcd-backup.db --data-dir /var/lib/etcd-backup
+```
+After edit /etc/kubernetes/manifests/etcd.yaml and change /var/lib/etcd to /var/lib/etcd-backup.
